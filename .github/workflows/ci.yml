@@ -18,7 +18,8 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get -qq update &&
-          sudo apt-get install -y build-essential ninja-build
+          sudo apt-get install -y build-essential ninja-build gcc-12 g++-12 &&
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 90 --slave /usr/bin/g++ g++ /usr/bin/g++-12 --slave /usr/bin/gcov gcov /usr/bin/gcov-12
       - name: Install CMake
         uses: lukka/get-cmake@latest
       - name: Install Vcpkg
@@ -31,7 +32,6 @@ jobs:
           configurePreset: 'ninja-vcpkg'
           buildPreset: 'ninja-vcpkg-release'
           testPreset: 'ninja-vcpkg-test-release'
-          testPresetAdditionalArgs: "['--no-tests=error','--output-on-failure','--verbose']"
       - name: Tag Version
         if: github.ref == 'refs/heads/main'
         run: |

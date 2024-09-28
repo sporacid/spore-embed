@@ -1,9 +1,10 @@
 #pragma once
 
 #include <cstdint>
-#include <format>
 #include <span>
 #include <vector>
+
+#include "fmt/format.h"
 
 #include "spore/embed/embed_error.hpp"
 #include "spore/embed/embed_options.hpp"
@@ -96,7 +97,7 @@ namespace spore::embed
                 throw embed_error {embed_error_code::invalid, "invalid width, value={} min={}", _options.width, hex_width};
             }
 
-            const std::string format = std::format("{{:#0{}x}}, ", hex_count * sizeof(integer_t) + hex_count);
+            const std::string format = fmt::format("{{:#0{}x}}, ", hex_count * sizeof(integer_t) + hex_count);
 
             std::size_t width = 0;
 
@@ -108,7 +109,7 @@ namespace spore::embed
                     _options.output << std::endl;
                 }
 
-                _options.output << std::vformat(format, std::make_format_args(integer));
+                _options.output << fmt::vformat(format, fmt::make_format_args(integer));
 
                 width += hex_width;
             }
