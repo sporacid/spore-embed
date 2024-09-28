@@ -8,7 +8,7 @@ PATCH=0
 FIRST=0
 
 for GIT_COMMIT in $GIT_COMMITS; do
-  if [[ -n $FIRST ]]; then
+  if [[ $FIRST -eq 0 ]]; then
     FIRST=1
     continue
   fi
