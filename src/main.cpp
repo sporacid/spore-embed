@@ -14,6 +14,7 @@ namespace spore::embed::detail::metavars
     constexpr auto file = "FILE";
     constexpr auto format = "FORMAT";
     constexpr auto integer = "INTEGER";
+    constexpr auto indent = "INDENT";
 }
 
 int main(const int argc, const char* argv[])
@@ -55,8 +56,14 @@ int main(const int argc, const char* argv[])
         .add_argument("-f", "--format")
         .help("Format of the output")
         .metavar(detail::metavars::format)
-        .default_value("hex")
+        .default_value(std::string {"hex"})
         .choices("hex");
+
+    arg_parser
+        .add_argument("-i", "--indent")
+        .help("Indentation to output on each lines")
+        .metavar(detail::metavars::indent)
+        .default_value(std::string {});
 
     arg_parser
         .add_argument("-d", "--debug")
@@ -79,6 +86,7 @@ int main(const int argc, const char* argv[])
     embed_options options {
         .output = std::cout,
         .file = arg_parser.get<std::string>("file"),
+        .indent = arg_parser.get<std::string>("--indent"),
         .bits = arg_parser.get<std::size_t>("--bits"),
         .width = arg_parser.get<std::size_t>("--width"),
         .format = parse_format(format),

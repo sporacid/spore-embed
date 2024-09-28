@@ -101,12 +101,18 @@ namespace spore::embed
 
             std::size_t width = 0;
 
+            if (!integers.empty())
+            {
+                _options.output << _options.indent;
+            }
+
             for (const integer_t integer : integers)
             {
                 if (width + hex_width > _options.width)
                 {
                     width = 0;
                     _options.output << std::endl;
+                    _options.output << _options.indent;
                 }
 
                 _options.output << fmt::vformat(format, fmt::make_format_args(integer));
