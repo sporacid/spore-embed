@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
-  "name": "spore-engine",
+  "name": "spore-embed",
   "version": "1.0",
   "builtin-baseline": "3508985146f1b1d248c67ead13f8f54be5b4f5da",
   "dependencies": [
